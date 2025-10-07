@@ -20,12 +20,13 @@ apiVersion: cis.f5.com/v1
 kind: TLSProfile
 metadata:
   name: nginx-tls
+  labels:
+    f5cr: "true"
 spec:
-  hosts:
-    - nginx.apps.dev.umniabank.ma
   tls:
     termination: edge
-    clientSSL: /Common/placeholder          # obligatoire, mais sera écrasé
-  secret:
-    name: wildcard-umniabank-tls            # <-- référence au Secret K8s
-    namespace: dev
+    clientSSLs:
+      - wildcard-umniabank-tls
+    reference: secrets
+  hosts:
+    - nginx.apps.dev.umniabank.ma
