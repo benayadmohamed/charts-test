@@ -8,7 +8,24 @@ spec:
   host: nginx.apps.dev.umniabank.ma   # FQDN exposé
   virtualServerAddress: 10.80.30.200 # VIP côté BIG-IP
   partition: k8s_dev                  # partition sur BIG-IP
+  tlsProfileName: nginx-tls
   pools:
     - path: /
       service: nginx-service
       servicePort: 80
+
+---
+apiVersion: cis.f5.com/v1
+kind: TLSProfile
+metadata:
+  name: nginx-tls
+  labels:
+    f5cr: "true"
+spec:
+  tls:
+    termination: edge
+    clientSSLs:
+      - wildcard-umniabank-tls
+    reference: secret
+  hosts:
+    - nginx.apps.dev.umniabank.ma
