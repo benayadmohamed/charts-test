@@ -9,6 +9,7 @@ spec:
   virtualServerAddress: 10.80.30.200 # VIP côté BIG-IP
   partition: k8s_dev                  # partition sur BIG-IP
   tlsProfileName: nginx-tls
+  httpTraffic: allow
   pools:
     - path: /
       service: nginx-service
