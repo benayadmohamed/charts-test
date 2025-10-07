@@ -27,6 +27,6 @@ spec:
     termination: edge
     clientSSLs:
       - wildcard-umniabank-tls
-    reference: secrets
+    reference: secret
   hosts:
     - nginx.apps.dev.umniabank.ma
