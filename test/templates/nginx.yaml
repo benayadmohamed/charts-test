@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -17,3 +17,10 @@ spec:
           image: nginx:1.25
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: nginx-storage
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: nginx-storage
+          persistentVolumeClaim:
+            claimName: csi-test-pvc
