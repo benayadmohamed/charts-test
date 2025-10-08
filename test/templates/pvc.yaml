@@ -4,7 +4,7 @@ metadata:
   name: csi-test-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: vsphere-csi-default
   resources:
     requests:
