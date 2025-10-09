@@ -55,7 +55,7 @@ spec:
         name: nginx-storage-sts      # ce nom est réutilisé dans volumeMounts
       spec:
         accessModes: ["ReadWriteOnce"]   # un volume par pod
-        storageClassName: csi-test-sc    # à adapter à ton CSI (ex: vsphere, longhorn, rook-ceph)
+        storageClassName: vsphere-csi-default   # à adapter à ton CSI (ex: vsphere, longhorn, rook-ceph)
         resources:
           requests:
             storage: 1Gi
