@@ -1,31 +1,31 @@
-{{/*apiVersion: networking.k8s.io/v1*/}}
-{{/*kind: Ingress*/}}
-{{/*metadata:*/}}
-{{/*  name: nginx-ingress*/}}
-{{/*  namespace: dev*/}}
-{{/*  annotations:*/}}
-{{/*    # Indique à F5 CIS qu’il doit gérer cet Ingress*/}}
-{{/*    kubernetes.io/ingress.class: f5*/}}
-{{/*    # Adresse VIP à utiliser sur le BIG-IP*/}}
-{{/*    virtual-server.f5.com/ip: "10.80.30.200"*/}}
-{{/*    # Partition BIG-IP cible*/}}
-{{/*    virtual-server.f5.com/partition: "k8s_dev"*/}}
-{{/*    # Type de termination TLS (edge : offload SSL sur BIG-IP)*/}}
-{{/*    virtual-server.f5.com/ssl-redirect: "true"*/}}
-{{/*spec:*/}}
-{{/*  ingressClassName: f5*/}}
-{{/*  tls:*/}}
-{{/*    - hosts:*/}}
-{{/*        - nginx-ingress.apps.dev.umniabank.ma*/}}
-{{/*      secretName: wildcard-umniabank-tls  # Secret TLS dans le namespace `dev`*/}}
-{{/*  rules:*/}}
-{{/*    - host: nginx-ingress.apps.dev.umniabank.ma*/}}
-{{/*      http:*/}}
-{{/*        paths:*/}}
-{{/*          - path: /*/}}
-{{/*            pathType: Prefix*/}}
-{{/*            backend:*/}}
-{{/*              service:*/}}
-{{/*                name: nginx-service*/}}
-{{/*                port:*/}}
-{{/*                  number: 80*/}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: dev
+  annotations:
+    # Indique à F5 CIS qu’il doit gérer cet Ingress
+    kubernetes.io/ingress.class: f5
+    # Adresse VIP à utiliser sur le BIG-IP
+    virtual-server.f5.com/ip: "10.80.30.200"
+    # Partition BIG-IP cible
+    virtual-server.f5.com/partition: "k8s_dev"
+    # Type de termination TLS (edge : offload SSL sur BIG-IP)
+    virtual-server.f5.com/ssl-redirect: "true"
+spec:
+  ingressClassName: f5
+  tls:
+    - hosts:
+        - nginx-ingress.apps.dev.umniabank.ma
+      secretName: wildcard-umniabank-tls  # Secret TLS dans le namespace `dev`
+  rules:
+    - host: nginx-ingress.apps.dev.umniabank.ma
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80
