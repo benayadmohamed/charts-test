@@ -5,7 +5,7 @@ metadata:
   labels:
     f5cr: "true"
 spec:
-  host: nginx-vs.apps.dev.umniabank.ma   # FQDN exposé
+  host: nginxvs.apps.dev.umniabank.ma   # FQDN exposé
   virtualServerAddress: 10.80.30.200 # VIP côté BIG-IP
   partition: k8s_dev                  # partition sur BIG-IP
   tlsProfileName: nginx-tls
@@ -28,4 +28,4 @@ spec:
       - wildcard-umniabank-tls
     reference: secret
   hosts:
-    - nginx-vs.apps.dev.umniabank.ma
+    - nginxvs.apps.dev.umniabank.ma
