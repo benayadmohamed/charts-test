@@ -24,3 +24,38 @@ spec:
         - name: nginx-storage
           persistentVolumeClaim:
             claimName: csi-test-pvc
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-sts
+spec:
+  serviceName: nginx-sts
+  replicas: 6                   # un pod = un PVC distinct
+  selector:
+    matchLabels:
+      app: nginx-sts
+  template:
+    metadata:
+      labels:
+        app: nginx-sts
+    spec:
+      containers:
+        - name: nginx-sts
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-storage-sts
+              mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+    - metadata:
+        name: nginx-storage-sts      # ce nom est réutilisé dans volumeMounts
+      spec:
+        accessModes: ["ReadWriteOnce"]   # un volume par pod
+        storageClassName: csi-test-sc    # à adapter à ton CSI (ex: vsphere, longhorn, rook-ceph)
+        resources:
+          requests:
+            storage: 1Gi
