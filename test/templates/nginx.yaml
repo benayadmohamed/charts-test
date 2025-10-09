@@ -33,7 +33,7 @@ metadata:
   name: nginx-sts
 spec:
   serviceName: nginx-sts
-  replicas: 6                   # un pod = un PVC distinct
+  replicas: 0                   # un pod = un PVC distinct
   selector:
     matchLabels:
       app: nginx-sts
